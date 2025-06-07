@@ -35,7 +35,7 @@ export default function Home() {
                         Play Now
                     </p>
                     <div className={styles.linkImage}>
-                      <Image src="/icons/home/arrow.svg" alt={"Arrow"} width={30} height={30} />
+                        <Image src="/icons/home/arrow.svg" alt={"Arrow"} width={30} height={30} />
                     </div>
                 </Link>
             </div>
