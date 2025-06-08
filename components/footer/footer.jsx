@@ -86,7 +86,7 @@ export default function Footer() {
                             objectFit: "contain",
                             borderRadius: "5px",
                             filter: "drop-shadow(0 0 5px rgba(0,0,0,0.5))",
-                        }} src="/icons/navbar/logo.gif" alt={"App Icon"} fill={true} />
+                        }} src="https://res.cloudinary.com/dqvwf3z2c/image/upload/v1749278510/cnpksweg6naobvwjyyy2.gif" alt={"App Icon"} fill={true} />
                     </div>
                 </div>
             </div>

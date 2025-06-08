@@ -1,5 +1,5 @@
 .button {
-  color: white;
+  color: #00fcfd;
   height: 100%;
   width: 100%;
   border-radius: 10px;
@@ -99,7 +99,7 @@
 }
 
 .Secondary.buttonContainer {
-  background : rgba(26, 26, 26, 1);
+  background : #5f2dfe;
   border-style : Solid;
   border-color : rgba(59, 59, 59, 1);
   border-width : 1px;

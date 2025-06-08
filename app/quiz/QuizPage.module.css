@@ -45,6 +45,7 @@
   margin-top: 2rem;
   padding: 1rem;
   border-radius: 1rem;
+  background-color: rgba(37, 37, 37, 0.93);
 }
 
 @media (min-width: 600px) {

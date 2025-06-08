@@ -54,6 +54,7 @@
 .page .content .link {
   display: flex;
   width: fit-content;
+  align-items: center;
   margin : 0 auto;
   gap: 10px;
   margin-top: 25px;
@@ -65,6 +66,8 @@
 .page .content .link .linkImage {
   width: fit-content;
   transition: all 0.2s ease-in-out;
+  display: relative;
+  transform: translatey(10px);
 }
 .page .content .link .text {
   font-size: 60px;
@@ -224,65 +227,6 @@
 }
 .linkOut:hover { opacity: 0.8;}
 .linkOut:active { transform: scale(0.9);}
-@media only screen and (max-width: 950px) {
-  .comparisonHead { margin-top: 200px;}
-  .comparisonHead>h2 { margin-top: -150px !important;}
-}
-@media only screen and (max-width: 900px) {
-  .contentContainer {
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  .leftContainer { width: 100%; height: 50%;}
-  .rightContainer {
-    width: 100%; height: 50%;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  .page .desktop { display: none;}
-  .page .mobile { display: block;}
-  .page .content { text-align: center;}
-  .page .content .header {
-    font-size: 40px;
-    line-height: 45px;
-  }
-  .page .content .lower { font-size: 40px;}
-  .page .content .link {
-    width: fit-content;
-    background-color: rgba(14,14,14,0.37);
-    border: 1px solid rgba(94,94,94,0.36);
-    backdrop-filter: blur(60px);
-    display: flex;
-    padding: 10px 20px 5px 20px;
-    border-radius: 10px;
-  }
-  .page .content .link:active {
-    transform: scale(0.95);
-  }
-  .page .content .link:active .text::after {
-    height: calc(100% - 12px);
-  }
-}
-@media only screen and (max-width: 670px) {
-  .aboutTop {
-    flex-direction: column-reverse;
-    gap: 20px;
-    margin-top: 80px;
-    width: calc(100vw - 40px);
-    max-width: 960px;
-  }
-  .rightC {
-    font-family: "Roboto", sans-serif;
-    font-size: 50px;
-    text-align: left;
-  }
-  .leftC{ width: 100%;}
-}
-
 .ctaLink {
   display: flex;
   justify-content: space-between;
@@ -290,7 +234,7 @@
   width: 100%;
 
   padding: 2rem;
-  color: #1a0036;            /* dark violet for text */
+  color: #1a0036;          
   text-decoration: none;
 
   font-size: 12rem;
@@ -347,3 +291,83 @@
   grid-template-rows: repeat(5, 1fr);
   width: 600px;
 }
+@media only screen and (max-width: 950px) {
+  .comparisonHead { margin-top: 200px;}
+  .comparisonHead>h2 { margin-top: -150px !important;}
+}
+@media only screen and (max-width: 900px) {
+  .contentContainer {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .leftContainer { width: 100%; height: 50%;}
+  .rightContainer {
+    width: 100%; height: 50%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .page .desktop { display: none;}
+  .page .mobile { display: block;}
+  .page .content { text-align: center;}
+  .page .content .header {
+    font-size: 40px;
+    line-height: 45px;
+  }
+  .page .content .lower { font-size: 40px;}
+  .page .content .link {
+    width: fit-content;
+    background-color: rgba(14,14,14,0.37);
+    border: 1px solid rgba(94,94,94,0.36);
+    backdrop-filter: blur(60px);
+    display: flex;
+    padding: 10px 20px 5px 20px;
+    border-radius: 10px;
+  }
+  .page .content .link:active {
+    transform: scale(0.95);
+  }
+  .page .content .link:active .text::after {
+    height: calc(100% - 12px);
+  }
+
+  .ctaLink {
+    font-size: 7rem;
+    padding: 1.5rem;
+  }
+
+  .patternContainer {
+    font-size: 2rem;
+  }
+}
+@media only screen and (max-width: 670px) {
+  .aboutTop {
+    flex-direction: column-reverse;
+    gap: 20px;
+    margin-top: 80px;
+    width: calc(100vw - 40px);
+    max-width: 960px;
+  }
+  .rightC {
+    width: 100%;
+    font-family: "Roboto", sans-serif;
+    font-size: 50px;
+    text-align: left;
+    margin: 0;
+    padding: 0;
+  }
+  .leftC{ width: 100%;}
+
+  .ctaLink {
+    font-size: 5rem;
+    padding: 1.5rem;
+  }
+
+  .patternContainer {
+    font-size: 2rem;
+  }
+}
+

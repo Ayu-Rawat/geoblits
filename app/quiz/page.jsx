@@ -5,6 +5,7 @@ import { QuizProvider } from "@/context/QuizContext.js";
 import Button from "@/components/buttons/button";
 import Styles from "./QuizPage.module.css";
 import { useUser } from "@auth0/nextjs-auth0";
+import Footer from "@/components/footer/footer";
 
 function App() {
   const array = [
@@ -197,6 +198,7 @@ function App() {
           </div>
         </div>
       </div>
+      <Footer />
     </QuizProvider>
   );
 }

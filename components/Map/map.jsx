@@ -53,9 +53,9 @@ function Map({ country }) {
       // Add GeoJSON with custom style
       L.geoJSON(data, {
         style: (feature) => ({
-          color: "black",
+          color: "#5f2dfe",
           weight: 1.5,
-          fillColor: feature.properties.name === country ? "#3b82f6" : "#f3f4f6",
+          fillColor: feature.properties.name === country ? "#00fcfd" : "#ff7dec",
           fillOpacity: 1,
         }),
       }).addTo(mapInstanceRef.current);
@@ -96,7 +96,7 @@ function Map({ country }) {
       style={{ 
         height: '500px', 
         width: '100%',
-        backgroundColor: '#f3f4f6'
+        backgroundColor: '#361a96'
       }}
       className="z-0"
     />

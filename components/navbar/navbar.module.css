@@ -46,8 +46,6 @@
         border-radius: 10px;
         transition: all 0.2s ease;
         animation: nav-bar-animation .7s cubic-bezier(0.87, 0, 0.13, 1) .2s forwards;
-    }
-    .leftBox:hover {
         background-color: rgba(56, 56, 56, 0.61);
     }
     .leftBox:active {
@@ -65,7 +63,6 @@
         border-radius: 10px;
         padding: 0 7px;
         font-weight: 200;
-        backdrop-filter: blur(20px);
         animation: nav-bar-animation-c .7s cubic-bezier(0.87, 0, 0.13, 1) .4s forwards;
         .link {
             position: relative;
@@ -115,15 +112,12 @@
         border-radius: 10px;
         padding: 0 7px;
         font-weight: 200;
-        backdrop-filter: blur(20px);
         transition: all 0.2s ease;
         animation: nav-bar-animation .7s cubic-bezier(0.87, 0, 0.13, 1) .6s forwards;
+        background-color: rgba(56, 56, 56, 0.61);
     }
     .rightBox.mob {
         display: none;
-    }
-    .rightBox:hover {
-        background-color: rgba(56, 56, 56, 0.61);
     }
     .rightBox:active {
         opacity: 0.7;
@@ -226,25 +220,10 @@
                     letter-spacing: -1px;
                 }
             }
-            .discordIcon {
-                margin-top: 20px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                width: fit-content;
-                padding: 10px;
-                border-radius: 10px;
-                background-color: #282828;
-                transition: all 0.3s cubic-bezier(0.87, 0, 0.13, 1);
-            }
-            .discordIcon:active {
-                opacity: 0.8;
-                transform: scale(0.9);
-            }
         }
         .mobileLinkBox.activeMd {
             transform: scale(1);
-            height: 240px;
+            height: 260px;
             padding: 28px;
             margin-top: 60px;
         }
@@ -265,5 +244,13 @@
         opacity: 1;
         pointer-events: auto;
 
+    }
+
+    .homeIcon {
+        padding: 10px;
+        margin-top: 20px;
+        position: relative;
+        bottom : -40px;
+        border-radius: 4px;
     }
 }

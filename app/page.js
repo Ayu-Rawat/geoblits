@@ -6,11 +6,11 @@ import Footer from "@/components/footer/footer.jsx";
 export default function Home() {
     return (
     <article className={styles.page}>
-        <Image src="/backgrounds/my-bg.png" alt={"Background"} fill={true} style={{
+        <Image src="https://res.cloudinary.com/dqvwf3z2c/image/upload/v1749413279/my-bg_epnief.png" alt={"Background"} fill={true} style={{
             objectFit: "cover",
             objectPosition: "right",
         }} className={styles.desktop} quality={100}/>
-        <Image src="/backgrounds/my-bg-m.png" alt={"Background"} fill={true} style={{
+        <Image src="https://res.cloudinary.com/dqvwf3z2c/image/upload/v1749413280/my-bg-m_pwqnf4.png" alt={"Background"} fill={true} style={{
             objectFit: "cover",
         }} className={styles.mobile} quality={100}/>
         <main className={styles.content}>
@@ -23,7 +23,7 @@ export default function Home() {
                         Play Now
                     </p>
                     <div className={styles.linkImage}>
-                        <Image src="/icons/home/my-arrow-v2.png" alt={"Arrow"} width={60} height={60} />
+                        <Image src="/icons/home/my-arrow-v2.png" alt={"Arrow"} width={40} height={40} />
                     </div>
                 </Link>
             </div>

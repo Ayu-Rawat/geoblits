@@ -18,22 +18,20 @@ export default function NavBar({links, loggedIn}) {
     return (<>
             <div className={styles.navBar}>
                 <Link href={"/"} className={styles.leftBox}>
-                    < Image style={{borderRadius : "10px"}} src="/icons/navbar/logo.gif" alt={"Logo"} width={50} height={50}/>
+                    < Image style={{borderRadius : "10px"}} src="https://res.cloudinary.com/dqvwf3z2c/image/upload/v1749278510/cnpksweg6naobvwjyyy2.gif" alt={"Logo"} width={50} height={50}/>
                 </Link>
-                <div className={styles.centerBox} style={{backgroundColor: "#361a96",}}>
+                <div className={styles.centerBox}>
                     {links.map((link) => (
                         <Link key={link.href} className={checkUrl(link.href) ? `${styles.link} ${styles.active}` : styles.link}
                               href={link.href}>{link.text}</Link>
                     ))}
                 </div>
                 {!loggedIn ? <a style={{
-                    backgroundColor: "#361a96",
                     width: "160px",
                     color: "white",
                 }} href="/myprofile" className={styles.rightBox}>
                     Sign In
                 </a> : <a style={{
-                    backgroundColor: "#361a96",
                     width: "160px",
                     color: "white",
                 }} href="/auth/logout"  className={styles.rightBox}>Sign Out</a>}
@@ -41,8 +39,8 @@ export default function NavBar({links, loggedIn}) {
                 <div onClick={() => {
                     setIsOpen((v) => !v)
                 }} className={`${styles.mob} ${styles.rightBox} ${isOpen ? styles.menuActive : ""}`}>
-                    <Image className={styles.menuIcon} src="/icons/navbar/menu.svg" alt={"Men Icon"} width={18} height={18}/>
-                    <Image className={styles.crossIcon} src="/icons/navbar/cross.svg" alt={"Cross Icon"} width={18} height={18}/>
+                    <Image className={styles.menuIcon} src="https://res.cloudinary.com/dqvwf3z2c/image/upload/v1749414207/menu_au3vye.svg" alt={"Men Icon"} width={18} height={18}/>
+                    <Image className={styles.crossIcon} src="https://res.cloudinary.com/dqvwf3z2c/image/upload/v1749414211/cross_g0olm5.svg" alt={"Cross Icon"} width={18} height={18}/>
                 </div>
                 <div className={isOpen ? `${styles.mobileLinkBox} ${styles.activeMd}` : `${styles.mobileLinkBox}`}>
                     <div className={styles.linkList}>
@@ -54,6 +52,7 @@ export default function NavBar({links, loggedIn}) {
                     {!loggedIn ? <a href="/myprofile" className={styles.homeIcon}>
                         Sign In
                     </a> : <a style={{
+                        color: "white",
                         backgroundColor: "rgba(255,153,153,0.24)",
                         border: "1px solid rgba(255,153,153,0.24)",
                     }} href="/auth/logout"  className={styles.homeIcon}>Sign Out</a>}

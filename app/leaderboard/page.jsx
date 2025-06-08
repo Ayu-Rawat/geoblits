@@ -1,6 +1,7 @@
 "use client";
 
 import React,{useState,useEffect} from "react";
+import Footer from "@/components/footer/footer";
 
 const LeaderboardPage = () => {
     const [leaderboard, setLeaderboard] = useState([]);
@@ -41,6 +42,7 @@ const LeaderboardPage = () => {
             </li>
             ))}
         </ul>
+        <Footer />
         </div>
     );
 }
