@@ -18,25 +18,23 @@ export default function NavBar({links, loggedIn}) {
     return (<>
             <div className={styles.navBar}>
                 <Link href={"/"} className={styles.leftBox}>
-                    <Image src="/icons/navbar/logo.gif" alt={"Logo"} width={40} height={40} style={{
-                        borderRadius: "8px",
-                    }}/>
+                    < Image style={{borderRadius : "10px"}} src="/icons/navbar/logo.gif" alt={"Logo"} width={50} height={50}/>
                 </Link>
-                <div className={styles.centerBox}>
+                <div className={styles.centerBox} style={{backgroundColor: "#361a96",}}>
                     {links.map((link) => (
                         <Link key={link.href} className={checkUrl(link.href) ? `${styles.link} ${styles.active}` : styles.link}
                               href={link.href}>{link.text}</Link>
                     ))}
                 </div>
                 {!loggedIn ? <a style={{
-                    width: "100px",
+                    backgroundColor: "#361a96",
+                    width: "160px",
                     color: "white",
                 }} href="/myprofile" className={styles.rightBox}>
                     Sign In
                 </a> : <a style={{
-                    backgroundColor: "rgba(255,153,153,0.24)",
-                    border: "1px solid rgba(255,153,153,0.24)",
-                    width: "100px",
+                    backgroundColor: "#361a96",
+                    width: "160px",
                     color: "white",
                 }} href="/auth/logout"  className={styles.rightBox}>Sign Out</a>}
 
@@ -44,9 +42,6 @@ export default function NavBar({links, loggedIn}) {
                     setIsOpen((v) => !v)
                 }} className={`${styles.mob} ${styles.rightBox} ${isOpen ? styles.menuActive : ""}`}>
                     <Image className={styles.menuIcon} src="/icons/navbar/menu.svg" alt={"Men Icon"} width={18} height={18}/>
-                    <Image className={styles.crossIcon} src="/icons/navbar/cross.svg" alt={"Cross Icon"} width={18} height={18}/>
-                </div>
-                <div className={isOpen ? `${styles.mobileLinkBox} ${styles.activeMd}` : `${styles.mobileLinkBox}`}>
                     <Image className={styles.crossIcon} src="/icons/navbar/cross.svg" alt={"Cross Icon"} width={18} height={18}/>
                 </div>
                 <div className={isOpen ? `${styles.mobileLinkBox} ${styles.activeMd}` : `${styles.mobileLinkBox}`}>

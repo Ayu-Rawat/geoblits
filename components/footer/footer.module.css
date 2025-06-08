@@ -5,11 +5,11 @@
     padding: 20px 40px;
     overflow: hidden;
     margin-top: 100px;
-    background-color: rgb(24, 24, 24);
+    background-color: #5f2dfe;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     color: white;
-    height: 400px;
+    height: 260px;
     z-index: 0;
     width: 100vw;
     position: relative;
@@ -19,16 +19,10 @@
     line-height: .9;
     position: absolute;
     left: 80px;
-    top: 40px;
+    top: 10px;
     font-family: "Impact", sans-serif;
-    font-size: 13vw;
-    color: #141414;
-    opacity: .4;
-    text-shadow:
-            1px 1px 0 #ffffff,
-            -1px -1px 0 #ffffff,
-            1px -1px 0 #ffffff,
-            -1px 1px 0 #ffffff;
+    font-size: 20px;
+    color: white;
     font-weight: 800;
     width: fit-content;
     margin-bottom: 10px;

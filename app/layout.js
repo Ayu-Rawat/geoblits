@@ -18,6 +18,8 @@ export default function RootLayout({ children }) {
           rel="stylesheet"
           href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         />
+        <link 
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap" rel="stylesheet"/>
       </head>
       <body>
         <Auth0Provider >

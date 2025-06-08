@@ -38,7 +38,7 @@ export default function Footer() {
                         <a className={styles.link} href={"mailto:jeepedia.in@gmail.com"} target={"_blank"}>
                             Mail
                         </a>
-                        <a className={styles.link} href={"https://github.com/J2J-App"} target={"_blank"}>
+                        <a className={styles.link} href={"https://github.com/Ayu-Rawat/quiz-app"} target={"_blank"}>
                             GitHub
                         </a>
                     </div>
@@ -50,11 +50,17 @@ export default function Footer() {
                             fontSize: "16px",
                             fontWeight: "200",
                         }}>
-                            <span>Projects</span>
+                            <span>My Social Links</span>
                         </h4>
-                        <Link className={styles.link} href={"https://www.jeepedia.in/"}>
-                            jeepedia
-                        </Link>
+                        <a className={styles.link} href={"https://www.linkedin.com/in/ayush-rawat-480537307/"}>
+                            Linkedin
+                        </a>
+                        <a className={styles.link} href={"https://www.instagram.com/__ayush5506__/"}>
+                            Instagram
+                        </a>
+                        <a className={styles.link} href={"https://github.com/Ayu-Rawat"}>
+                            Github
+                        </a>
                     </div>
                 </div>
                 <div className={styles.lowerCon}>
@@ -66,7 +72,7 @@ export default function Footer() {
                         fontWeight: "300",
                         color: "rgba(255,255,255,0.65)",
                     }}>
-                        Copyright © 2025 GEOBLITZ. All rights reserved.
+                        Made For Fun.
                     </p>
                     <div style={{
                         position: "relative",
