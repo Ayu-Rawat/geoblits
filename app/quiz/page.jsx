@@ -6,6 +6,8 @@ import Button from "@/components/buttons/button";
 import Styles from "./QuizPage.module.css";
 import { useUser } from "@auth0/nextjs-auth0";
 import Footer from "@/components/footer/footer";
+import Dialog from "@/components/dialog-box/dialog-box.jsx";
+import Link from "next/link";
 
 function App() {
   const array = [
@@ -42,6 +44,8 @@ function App() {
     "United States of America", "Uzbekistan", "Venezuela", "Vietnam", "Vanuatu",
     "West Bank", "Yemen", "South Africa", "Zambia", "Zimbabwe"
   ];
+  const [endGameData, setEndGameData] = useState({})
+  const [dialogOpen, setDialogOpen] = useState(false);
   const [loding, setloding] = useState(false);
   const [countries, setCountries] = useState(array);
   const [country, setCountry] = useState("India");
@@ -50,6 +54,52 @@ function App() {
   const [highLevel, setHighlevel] = useState(1);
 
   const { user, isLoading } = useUser();
+
+  function getEndGameData(score) {
+    if (score <= 1) {
+      return {
+        title: "🤡 Clown",
+        line: "Did you click with your eyes closed? 💀",
+      };
+    }
+    if (score <= 3) {
+      return {
+        title: "🙃 Could Be Worse",
+        line: "At least you didn’t get zero… I guess?",
+      };
+    }
+    if (score <= 6) {
+      return {
+        title: "😌 Not Bad",
+        line: "You're getting there, one guess at a time.",
+      };
+    }
+    if (score <= 10) {
+      return {
+        title: "😎 Well Played",
+        line: "You’re flexing just a little. Respect.",
+      };
+    }
+    if (score <= 20) {
+      return {
+        title: "🔥 Certified Pro",
+        line: "You might actually know stuff 😮",
+      };
+    }
+    if (score <= 50) {
+      return {
+        title: "🎬 Absolute Cinema",
+        line: "Oscar-worthy performance. Truly peak.",
+      };
+    }
+    return {
+      title: "🧠 GOD TIER",
+      line: "We’re not worthy 🙇 You win at life.",
+    };
+  }
+
+
+  let endGame;
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -60,8 +110,8 @@ function App() {
 
       setCountry(storedCountry || "India");
       setOptions(storedOptions ? JSON.parse(storedOptions) : []);
-      setLevel(storedLevel ? Number(storedLevel) : 1);
-      setHighlevel(storedHighLevel ? Number(storedHighLevel) : 1);
+      setLevel(storedLevel ? Number(storedLevel) : 0);
+      setHighlevel(storedHighLevel ? Number(storedHighLevel) : 0);
     }
   }, []);
 
@@ -139,12 +189,12 @@ function App() {
       localStorage.setItem("level", newLevel);
       nextQuestion();
     } else {
-      alert("Wrong! Try again. Correct answer was " + currentQuestion());
-      setloding(true);
+      endGame = getEndGameData(level);
+      setEndGameData(endGame);
+      setDialogOpen(true);
       await checkForHighlevel();
       setLevel(1);
       localStorage.setItem("level", 1);
-      nextQuestion();
     }
   };
 
@@ -152,7 +202,42 @@ function App() {
     return <div style={{ color: "white", textAlign: "center", marginTop: "2rem" }}>Loading...</div>;
   }
 
-  return (
+  return (<>
+    <Dialog isOpen={dialogOpen} setIsOpen={setDialogOpen}>
+      <h1
+        style={{
+          fontFamily: "Roboto, sans-serif",
+          fontSize: "24px",
+          fontWeight: "200",
+          margin: "10px 5px 20px",
+          lineHeight: "24px",
+          color: "white",
+          textAlign: "center",
+          fontSize: "2rem",
+        }}
+      >
+        Game Over
+      </h1>
+      <div style={{ textAlign: "center", marginBottom: "20px" }}>
+        <h1 style={{color : "White",marginTop:"10px",marginBottom:"10px"}}>{endGameData.title}</h1>
+        <p style={{color : "White",marginBottom:"10px"}}>{endGameData.line}</p>
+        <p style={{ color: "white", marginBottom: "20px" }}>
+          Your score is {level}, The highest score is {highLevel}
+        </p>
+      </div>
+      <div 
+      style={{
+        display: "flex",
+        gap: "10px",
+        justifyContent: "center",
+      }}
+      >
+        <Button onClick={() => {setDialogOpen(false);nextQuestion()}} text="Retry" variant="Secondary" width={120}/>
+        <Link href="/leaderboard">
+          <Button onClick={() => {setDialogOpen(false);nextQuestion()}} text="Leader Board" variant="Outline" width={130}/>
+        </Link>
+      </div>
+    </Dialog>
     <QuizProvider value={{ currentQuestion, isCorrect, nextQuestion }}>
       <div className={Styles.page}>
         <div className={Styles.container}>
@@ -189,8 +274,9 @@ function App() {
           </div>
         </div>
       </div>
-      <Footer />
     </QuizProvider>
+      <Footer />
+    </>
   );
 }
 
