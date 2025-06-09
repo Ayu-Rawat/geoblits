@@ -129,6 +129,8 @@ export default function MyProfilePage() {
   if (error) return <div>Error: {error.message}</div>;
   if (isLoading || !userData) return <div>Loading...</div>;
 
+  console.log("User Data:", user);
+
   return (
     <>
       <Dialog isOpen={dialogOpen}>
