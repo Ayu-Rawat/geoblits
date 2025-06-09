@@ -177,8 +177,8 @@ function App() {
                 alignItems: "center",
                 gap: "10px"
             }}>
-          <span className={Styles.tab}>Highest Level : {highLevel}</span>
-          <span className={Styles.tab}>Current Level : {level}</span>
+          <span className={Styles.tab}>Highest Score : {highLevel}</span>
+          <span className={Styles.tab}>Current Score : {level}</span>
           </div>
           <div className={Styles.mapContainer}>
             <Map country={currentQuestion()} />

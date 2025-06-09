@@ -23,7 +23,7 @@ export default function Home() {
                         Play Now
                     </p>
                     <div className={styles.linkImage}>
-                        <Image src="/icons/home/my-arrow-v2.png" alt={"Arrow"} width={40} height={40} />
+                        <Image src="https://res.cloudinary.com/dqvwf3z2c/image/upload/v1749441094/my-arrow-v2_j4xz6n.png" alt={"Arrow"} width={40} height={40} />
                     </div>
                 </Link>
             </div>

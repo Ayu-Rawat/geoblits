@@ -46,7 +46,7 @@
         border-radius: 10px;
         transition: all 0.2s ease;
         animation: nav-bar-animation .7s cubic-bezier(0.87, 0, 0.13, 1) .2s forwards;
-        background-color: rgba(56, 56, 56, 0.61);
+        background-color: #361a96;
     }
     .leftBox:active {
         opacity: 0.7;
@@ -131,29 +131,123 @@
 }
 
 @media only screen and (max-width: 900px) {
+    .leftBox {
+        margin-top: 20px;
+        margin-left: 20px;
+    }
+    .rightBox {
+        margin-top: 20px;
+        margin-right: 20px;
+    }
+    
     .navBar {
-        padding: 0 20px;
-        top: 20px;
-        .rightBox {
+        margin: 0;
+        padding: 0;
+        top: 0px;
+        .rightBox{
+            z-index: 1000;
+            position: relative;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
             display: none;
+            cursor: pointer;
+            background-color: transparent;
         }
+
+        .rightBox.menuInactive{
+            border: 2.5px solid #361a96;
+            overflow: hidden;
+        }
+
+        .rightBox.menuInactive::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background-color: #361a96;
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 1s ease, width 0s, height 0s;
+            z-index: 0;
+        }
+
+        .rightBox.menuInactive:hover::before {
+            width: 200%;
+            height: 200%;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .rightBox.menuInactive:hover {
+            color: white;
+        }
+
+        .rightBox.menuInactive > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .crossIcon {
+            display: inline-block;
+            transition: transform 0.3s ease;
+            font-size: 34px;
+            font-weight: lighter;
+        }
+
+        .rotate {
+            transform: translateX(1px) rotate(45deg);
+        }
+
+
+        .rightBox.menuActive{
+            color: white;
+            border: 2.5px solid #ff7dec;
+        }
+
+        .rightBox.menuActive::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background-color: #ff7dec;
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 1s ease, width 0s, height 0s;
+            z-index: 0;
+        }
+
+        .rightBox.menuActive:hover::before {
+            width: 200%;
+            height: 200%;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .rightBox.menuActive:hover {
+            color: white;
+        }
+
+        .rightBox.menuActive > * {
+            position: relative;
+            z-index: 1;
+        }
+
         .rightBox.mob {
             display: flex;
             position: relative;
             overflow: hidden;
             .menuIcon {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
+                color: white;
+                letter-spacing: -2px;
+                position: relative;
+                transform: translateY(-9.5px);
                 transition: all 0.4s cubic-bezier(0.87, 0, 0.13, 1);
             }
             .crossIcon {
-                position: absolute;
-                top: 50%;
-                left: 150%;
-                transform: translate(-50%, -50%);
-                transition: all 0.4s cubic-bezier(0.87, 0, 0.13, 1);
+                display: none;
             }
         }
         .rightBox.mob.menuActive {
@@ -161,10 +255,10 @@
             position: relative;
             overflow: hidden;
             .menuIcon {
-                left: -150%;
+                display: none;
             }
             .crossIcon {
-                left: 50%;
+                display: block;
             }
         }
         .centerBox {
@@ -172,60 +266,34 @@
         }
         .mobileLinkBox {
             display: block;
+            position: relative;
+            top:-20px;
             width: 100%;
-            height: 0px;
-            border-radius: 10px;
-            border: 1px solid rgba(44, 44, 44, 0.43);
-            background-color: rgba(35, 35, 35, 0.61);
-            backdrop-filter: blur(20px);
+            height: 100vh;
+            background-color: #361a96;
             transform-origin: top right;
             transform: scale(0);
             transition: all 0.7s cubic-bezier(0.87, 0, 0.13, 1);
             .linkList {
                 display: flex;
                 flex-direction: column;
+                align-items: center;
                 gap: 18px;
                 .link {
-                    font-family: "Roboto", sans-serif;
-                    color: white;
-                    text-decoration: none;
-                    font-size: 24px;
-                    font-weight: 200;
+                    color: #ff7dec;
+                    font-size: 4rem;
+                    font-weight: 900;
                     border-radius: 6px;
                     position: relative;
                     width: fit-content;
                     transition: all 0.2s ease;
                 }
-                .link::after {
-                    content: "";
-                    position: absolute;
-                    top: 50%;
-                    transform: translateY(-50%);
-                    right: 0;
-                    filter: blur(20px);
-                    background : linear-gradient(90deg, rgba(224, 166, 255, 1) 0%, rgba(143, 158, 246, 1) 50%, rgba(133, 255, 208, 1) 100%);
-                    width: 100%;
-                    height: 10px;
-                    opacity: 0;
-                    transition: all 0.3s cubic-bezier(0.87, 0, 0.13, 1);
-                }
-                .link:active {
-                    opacity: 0.5;
-                }
-                .link.active:after {
-                    opacity: 1;
-                }
-                .link.active {
-                    font-weight: 800;
-                    letter-spacing: -1px;
-                }
             }
         }
         .mobileLinkBox.activeMd {
             transform: scale(1);
-            height: 260px;
+            height: 100vh;
             padding: 28px;
-            margin-top: 60px;
         }
     }
     .mobileBg {
@@ -246,11 +314,27 @@
 
     }
 
+    .homeIconContainer {
+        text-align: center;
+    }
+
+
     .homeIcon {
+        font-size: 2rem;
+        color: white;
+        background-color: transparent;
+        border: 1.5px solid #ff7dec;
+        position: relative;
         padding: 10px;
         margin-top: 20px;
         position: relative;
         bottom : -40px;
-        border-radius: 4px;
+        border-radius: 8px;
+
+        display: inline-block;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        overflow: hidden;
     }
 }

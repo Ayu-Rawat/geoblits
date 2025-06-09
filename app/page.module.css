@@ -207,6 +207,8 @@
 }
 .rightC {
   font-family: "Roboto", sans-serif;
+  color: transparent;
+  -webkit-text-stroke: 2px #00fcfd;
   font-weight: 800;
   font-size: 72px;
   text-align: right;
@@ -320,9 +322,6 @@
   .page .content .lower { font-size: 40px;}
   .page .content .link {
     width: fit-content;
-    background-color: rgba(14,14,14,0.37);
-    border: 1px solid rgba(94,94,94,0.36);
-    backdrop-filter: blur(60px);
     display: flex;
     padding: 10px 20px 5px 20px;
     border-radius: 10px;
