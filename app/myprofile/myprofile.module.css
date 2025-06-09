@@ -1,7 +1,7 @@
 .page{
     margin-top: 140px;
     width: 100vw;
-    height: calc(100vh -  140px);
+    height: calc(100vh -  180px);
     display: flex;
     flex-direction: column;
     padding: 10px;
@@ -46,16 +46,44 @@
     border: 1.5px solid #ff7dec;
 }
 
+.profileImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* or 'contain' if you want full image visibility with empty space */
+    border-radius: 8px;
+}
+
 .profileInfo{
     margin: auto 0;
     display: flex;
     flex-direction: column;
     gap: 10px;
     margin-left: 20px;
+    overflow: hidden;
+    width: 300px;
+}
+
+.buttonContainer{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 4px;
 }
 
 .editButton{
-    width:50%;
+    width:35%;
+    height: 44px;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    border: 1.5px solid #ff7dec;
+    background-color: #5f2dfe;
+    cursor: pointer;
+}
+
+.catButton{
+    width:65%;
+    height: 44px;
     padding: 10px;
     border-radius: 10px;
     text-align: center;

@@ -42,17 +42,15 @@ function App() {
     "United States of America", "Uzbekistan", "Venezuela", "Vietnam", "Vanuatu",
     "West Bank", "Yemen", "South Africa", "Zambia", "Zimbabwe"
   ];
-
+  const [loding, setloding] = useState(false);
   const [countries, setCountries] = useState(array);
   const [country, setCountry] = useState("India");
   const [options, setOptions] = useState([]);
   const [level, setLevel] = useState(1);
   const [highLevel, setHighlevel] = useState(1);
 
-  //user info
-  const { user } = useUser();
+  const { user, isLoading } = useUser();
 
-  // Load from localStorage on mount
   useEffect(() => {
     if (typeof window !== "undefined") {
       const storedCountry = localStorage.getItem("currentCountry");
@@ -66,7 +64,6 @@ function App() {
       setHighlevel(storedHighLevel ? Number(storedHighLevel) : 1);
     }
   }, []);
-
 
   const getRandomCountry = (excluded = []) => {
     const filteredCountries = countries.filter((c) => !excluded.includes(c));
@@ -83,15 +80,15 @@ function App() {
           method: "POST",
           credentials: "include",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ score: level,user }),
+          body: JSON.stringify({ score: level, user }),
         });
       } catch (error) {
         console.error("Error updating high level:", error);
+      }finally {
+        setloding(false);
       }
     }
   };
-
-
 
   const generateOptions = (currentCountry) => {
     const correctCountry = currentCountry;
@@ -110,7 +107,7 @@ function App() {
     if (
       country &&
       options.length === 0 &&
-      !localStorage.getItem("options") // Only generate if localStorage has no options
+      !localStorage.getItem("options")
     ) {
       const newOptions = generateOptions(country);
       setOptions(newOptions);
@@ -136,8 +133,6 @@ function App() {
 
   const isCorrect = async (e) => {
     const selectedOption = e.target.innerText;
-    console.log("Selected Option:", selectedOption);
-
     if (selectedOption === country) {
       const newLevel = level + 1;
       setLevel(newLevel);
@@ -145,6 +140,7 @@ function App() {
       nextQuestion();
     } else {
       alert("Wrong! Try again. Correct answer was " + currentQuestion());
+      setloding(true);
       await checkForHighlevel();
       setLevel(1);
       localStorage.setItem("level", 1);
@@ -152,6 +148,9 @@ function App() {
     }
   };
 
+  if (isLoading || loding) {
+    return <div style={{ color: "white", textAlign: "center", marginTop: "2rem" }}>Loading...</div>;
+  }
 
   return (
     <QuizProvider value={{ currentQuestion, isCorrect, nextQuestion }}>
@@ -159,18 +158,18 @@ function App() {
         <div className={Styles.container}>
           <h1 className={Styles.title}>Guess The Highlighted Country</h1>
           <div
-          style={{
-                backgroundColor: "rgba(0,0,0,0)",
-                marginTop: "20px",
-                marginBottom: "0px",
-                display: "flex",
-                flexDirection: "row-reverse",
-                justifyContent: "center",
-                alignItems: "center",
-                gap: "20px"
+            style={{
+              backgroundColor: "rgba(0,0,0,0)",
+              marginTop: "20px",
+              marginBottom: "0px",
+              display: "flex",
+              flexDirection: "row-reverse",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: "20px"
             }}>
-          <span className={Styles.tab}>Highest Score : {highLevel}</span>
-          <span className={Styles.tab}>Current Score : {level}</span>
+            <span className={Styles.tab}>Highest Score : {highLevel}</span>
+            <span className={Styles.tab}>Current Score : {level}</span>
           </div>
           <div className={Styles.mapContainer}>
             <Map country={currentQuestion()} />
