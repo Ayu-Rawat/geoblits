@@ -54,11 +54,23 @@ export async function POST(req) {
     }
   }
 
+  let email = user.email
+
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    email = email + '@gmail.com'; 
+  }
+
+  let nickname = user.name
+
+  if(!nickname){
+    nickname = user.email.split('@')[0]; 
+  }
+
   const insertQuery = `
     INSERT INTO users (user_id, nickname, email, image_url)
     VALUES ($1, $2, $3, $4)
   `;
-  const values = [user.sub, user.nickname, user.name, imageUrl];
+  const values = [user.sub,nickname, email,  imageUrl];
   await sql.query(insertQuery, values);
 
   return NextResponse.json({

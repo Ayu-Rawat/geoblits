@@ -264,17 +264,19 @@
         .centerBox {
             display: none;
         }
+
         .mobileLinkBox {
             display: block;
             position: relative;
             top:-20px;
             width: 100%;
-            height: 100vh;
+            height: 0;
             background-color: #361a96;
             transform-origin: top right;
             transform: scale(0);
             transition: all 0.7s cubic-bezier(0.87, 0, 0.13, 1);
             .linkList {
+                margin-top: 120px;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
@@ -291,6 +293,7 @@
             }
         }
         .mobileLinkBox.activeMd {
+            display: block;
             transform: scale(1);
             height: 100vh;
             padding: 28px;

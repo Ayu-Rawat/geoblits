@@ -157,15 +157,7 @@ function App() {
     <QuizProvider value={{ currentQuestion, isCorrect, nextQuestion }}>
       <div className={Styles.page}>
         <div className={Styles.container}>
-          <h1 style={{
-                    marginTop: "40px",
-                    width: "100%",
-                    color: "white",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                    alignItems: "center",
-                }}>Guess The Highlighted Country</h1>
+          <h1 className={Styles.title}>Guess The Highlighted Country</h1>
           <div
           style={{
                 backgroundColor: "rgba(0,0,0,0)",
@@ -175,7 +167,7 @@ function App() {
                 flexDirection: "row-reverse",
                 justifyContent: "center",
                 alignItems: "center",
-                gap: "10px"
+                gap: "20px"
             }}>
           <span className={Styles.tab}>Highest Score : {highLevel}</span>
           <span className={Styles.tab}>Current Score : {level}</span>
