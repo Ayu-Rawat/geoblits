@@ -54,7 +54,7 @@ export async function POST(req) {
     }
   }
 
-  let email = user.email
+  let email = user.name || user.email;
 
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     email = email + '@gmail.com'; 
