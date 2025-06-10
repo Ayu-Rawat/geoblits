@@ -1,6 +1,15 @@
 import { NextResponse } from 'next/server';
 import sql from '@/db/db';
 import cloudinary from '@/lib/cloudinary';
+import crypto from 'crypto';
+
+// Secret salt from environment
+const SALT = process.env.HASH_SALT || 'your-secret-salt';
+
+// Secure SHA-256 hash with salt
+function hashWithSalt(sub){
+  return crypto.createHash('sha256').update(SALT + sub).digest('hex').slice(0, 32);
+}
 
 export async function PATCH(req) {
   const body = await req.json();
@@ -13,13 +22,15 @@ export async function PATCH(req) {
     );
   }
 
+  // Create a secure hashed ID for Cloudinary
+  const hashedId = hashWithSalt(userId);
   let finalImageUrl = imageUrl;
 
   if (imageUrl && !imageUrl.includes('res.cloudinary.com')) {
     try {
       const uploadResult = await cloudinary.uploader.upload(imageUrl, {
         folder: 'quiz-app-users',
-        public_id: nickname,
+        public_id: hashedId,
         overwrite: true,
       });
       finalImageUrl = uploadResult.secure_url;
@@ -52,7 +63,7 @@ export async function PATCH(req) {
     );
   }
 
-  values.push(userId);
+  values.push(userId); // Still use original userId for DB lookup
 
   const query = `
     UPDATE users

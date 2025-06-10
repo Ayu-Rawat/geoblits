@@ -1,6 +1,14 @@
 import { NextResponse } from 'next/server';
 import sql from '@/db/db';
 import cloudinary from '@/lib/cloudinary';
+import crypto from 'crypto';
+
+// Secure hash function with secret salt
+const SALT = process.env.HASH_SALT || 'your-secret-salt';
+
+function hashWithSalt(sub){
+  return crypto.createHash('sha256').update(SALT + sub).digest('hex').slice(0, 32);
+}
 
 export async function POST(req) {
   const body = await req.json();
@@ -24,24 +32,25 @@ export async function POST(req) {
   }
 
   let imageUrl;
+  const hashedId = hashWithSalt(user.sub); // Secure hashed ID
 
   try {
     const uploadedImage = await cloudinary.uploader.upload(user.picture, {
       folder: 'quiz-app-users',
-      public_id: user.nickname,
+      public_id: hashedId,
       overwrite: true,
     });
     imageUrl = uploadedImage.secure_url;
   } catch (err) {
     console.error('Cloudinary upload failed, using fallback image.', err.message);
-    
+
     try {
       const res = await fetch('https://api.thecatapi.com/v1/images/search');
       const data = await res.json();
       const random_imageUrl = data[0]?.url || 'https://cdn2.thecatapi.com/images/MTY3ODIyMQ.jpg';
       const uploadedImage = await cloudinary.uploader.upload(random_imageUrl, {
         folder: 'quiz-app-users',
-        public_id: user.nickname,
+        public_id: hashedId,
         overwrite: true,
       });
       imageUrl = uploadedImage.secure_url;
@@ -56,21 +65,20 @@ export async function POST(req) {
 
   let email = user.nickname || user.email;
 
-  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    email = email + '@gmail.com'; 
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    email = email + '@gmail.com';
   }
 
-  let nickname = user.name
-
-  if(!nickname){
-    nickname = user.email.split('@')[0]; 
+  let nickname = user.name;
+  if (!nickname) {
+    nickname = user.email.split('@')[0];
   }
 
   const insertQuery = `
     INSERT INTO users (user_id, nickname, email, image_url)
     VALUES ($1, $2, $3, $4)
   `;
-  const values = [user.sub,nickname, email,  imageUrl];
+  const values = [user.sub, nickname, email, imageUrl];
   await sql.query(insertQuery, values);
 
   return NextResponse.json({

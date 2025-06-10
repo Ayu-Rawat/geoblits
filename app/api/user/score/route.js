@@ -16,7 +16,7 @@ export async function POST(req) {
   }
 
   const userId = user.sub;
-  const check = await sql.query('SELECT * FROM score_data WHERE user_id = $1', [userId]);
+  const check = await sql.query('SELECT user_id FROM score_data WHERE user_id = $1', [userId]);
 
   if (check.length > 0) {
     await sql.query('UPDATE score_data SET score = $1 WHERE user_id = $2', [score, userId]);
