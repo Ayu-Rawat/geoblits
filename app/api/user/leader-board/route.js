@@ -5,7 +5,6 @@ import sql from '@/db/db';
 export async function GET() {
   const query = `
     SELECT 
-      s.user_id, 
       u.nickname, 
       u.image_url, 
       s.score
