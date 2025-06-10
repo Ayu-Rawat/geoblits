@@ -8,6 +8,7 @@ import { useUser } from "@auth0/nextjs-auth0";
 import Footer from "@/components/footer/footer";
 import Dialog from "@/components/dialog-box/dialog-box.jsx";
 import Link from "next/link";
+import Loading from "@/components/loading/Loading";
 
 function App() {
   const array = [
@@ -199,7 +200,7 @@ function App() {
   };
 
   if (isLoading || loding) {
-    return <div style={{ color: "white", textAlign: "center", marginTop: "2rem" }}>Loading...</div>;
+    return <div><Loading/></div>;
   }
 
   return (<>

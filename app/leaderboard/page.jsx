@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Footer from "@/components/footer/footer";
 import Image from "next/image";
 import styles from "./leaderboard.module.css";
+import Loading from "@/components/loading/Loading";
 
 const LeaderboardPage = () => {
   const [leaderboard, setLeaderboard] = useState([]);
@@ -28,8 +29,8 @@ const LeaderboardPage = () => {
 
   if (loading)
     return (
-      <div style={{ marginTop: "140px", color: "white", textAlign: "center" }}>
-        Loading...
+      <div>
+        <Loading />
       </div>
     );
 

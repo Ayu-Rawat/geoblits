@@ -1,0 +1,94 @@
+@keyframes diagonalSlide {
+    from {
+        transform: translate(calc(0px * cos(-20deg)), calc(0px * sin(-20deg))) rotate(-20deg);
+        opacity: 1;
+    }
+    to {
+        transform: translate(calc(10000px * cos(-20deg)), calc(10000px * sin(-20deg))) rotate(-20deg);
+        opacity: 1;
+    }
+}
+
+@keyframes diagonalSlideBack {
+    from {
+        transform: translate(calc(0px * cos(-20deg)), calc(0px * sin(-20deg))) rotate(-20deg);
+        opacity: 1;
+    }
+    to {
+        transform: translate(calc(-10000px * cos(-20deg)), calc(-10000px * sin(-20deg))) rotate(-20deg);
+        opacity: 1;
+    }
+}
+
+.page {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    scrollbar-width: none;
+    background-color: #00fcfd;
+    color: #5f2dfe;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loadingContainer {
+    letter-spacing: -10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 16rem;
+    text-wrap: nowrap;
+    position: relative;
+    transform: translate(calc(0px * cos(-20deg)), calc(0px * sin(-20deg))) rotate(-20deg);
+    animation: diagonalSlide 50s linear forwards;
+    font-weight: 900;
+    position: absolute;
+    z-index: 2;
+}
+
+.loadingContainerBack {
+    margin-bottom:100px ;
+    letter-spacing: -10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 16rem;
+    text-wrap: nowrap;
+    position: relative;
+    transform: translate(calc(0px * cos(-20deg)), calc(0px * sin(-20deg))) rotate(-20deg);
+    animation: diagonalSlideBack 50s linear forwards;
+    font-weight: 900;
+    position: absolute;
+    z-index: 1;
+}
+
+.loadingTextBack {
+    color: transparent;
+    -webkit-text-stroke: 2px #361a96;
+}
+
+.loadingContainerWrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+@media screen and (max-width: 1000px) {
+    .loadingContainer {
+        font-size: 9rem;
+    }
+    .loadingContainerBack {
+        font-size: 9rem;
+    }
+    
+}

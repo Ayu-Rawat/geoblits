@@ -8,6 +8,7 @@ import Styles from "./myprofile.module.css";
 import Dialog from "@/components/dialog-box/dialog-box";
 import Button from "@/components/buttons/button";
 import SingleInput from "@/components/Inputs/SingleInput/singleInput.jsx";
+import Loading from "@/components/loading/Loading";
 
 export default function MyProfilePage() {
   const [newNickname, setNewNickname] = useState("");
@@ -127,7 +128,7 @@ export default function MyProfilePage() {
 
   if (!user && !isLoading) return <div>You are not logged in.</div>;
   if (error) return <div>Error: {error.message}</div>;
-  if (isLoading || !userData) return <div>Loading...</div>;
+  if (isLoading || !userData) return <div><Loading/></div>;
 
   console.log("User Data:", user);
 
