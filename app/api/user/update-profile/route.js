@@ -19,7 +19,7 @@ export async function PATCH(req) {
     try {
       const uploadResult = await cloudinary.uploader.upload(imageUrl, {
         folder: 'quiz-app-users',
-        public_id: userId,
+        public_id: nickname,
         overwrite: true,
       });
       finalImageUrl = uploadResult.secure_url;

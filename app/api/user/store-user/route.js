@@ -28,7 +28,7 @@ export async function POST(req) {
   try {
     const uploadedImage = await cloudinary.uploader.upload(user.picture, {
       folder: 'quiz-app-users',
-      public_id: user.sub,
+      public_id: user.nickname,
       overwrite: true,
     });
     imageUrl = uploadedImage.secure_url;
@@ -41,7 +41,7 @@ export async function POST(req) {
       const random_imageUrl = data[0]?.url || 'https://cdn2.thecatapi.com/images/MTY3ODIyMQ.jpg';
       const uploadedImage = await cloudinary.uploader.upload(random_imageUrl, {
         folder: 'quiz-app-users',
-        public_id: user.sub,
+        public_id: user.nickname,
         overwrite: true,
       });
       imageUrl = uploadedImage.secure_url;
