@@ -1,0 +1,91 @@
+.page{
+    height: calc(100vh -  180px);
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    gap: 20px;
+    background-color: #ff7dec;
+    max-width: 760px;
+    margin: 0 auto;
+    margin-top: 140px;
+}
+
+.background{
+    height: calc(100vh -  180px);
+    background-color: #ff7dec;
+    margin-top: 140px;
+}
+
+.title{
+    font-size: 4rem;
+    -webkit-text-stroke: 2px white;
+    color: transparent;
+    text-align: center;
+    margin-top: 10px;
+}
+
+
+.profileImage{
+    padding: 24px;
+    position: relative;
+    border-radius: 8px;
+}
+
+.tableContainer {
+    background-color: #1e1e1e;
+    overflow-x: auto;
+    border-radius: 10px;
+    padding: 8px;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #5f2dfe;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 2px solid #ff7dec;
+}
+
+.table th,
+.table td {
+    padding: 12px 16px;
+    text-align: left;
+}
+
+.table th {
+    background-color: #361a96;
+    color: white;
+    height: 70px;
+}
+
+.table tr:nth-child(even) {
+    background-color: #361a96;
+}
+
+.userCell {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.tableHeading{
+    padding: "10px";
+    background-color: "#5f2dfe";
+    border-radius: "10px";
+    margin: "10px";
+    border: "1px solid #ff7dec";
+}
+
+@media screen and (max-width: 600px) {
+    .title {
+        font-size: 3rem;
+    }
+}

@@ -33,7 +33,6 @@
 
 .mapContainer {
   margin-top: 20px;
-  border-radius: 16px;
 }
 
 .optionContainer {
@@ -42,7 +41,6 @@
   gap: 1rem;
   margin-top: 2rem;
   padding: 1rem;
-  background-color: #ff7dec;
 }
 
 .option{
