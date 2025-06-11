@@ -31,7 +31,6 @@ export async function POST(req) {
 
       await sql.query(queryUpdate, [userId]);
 
-      console.log(queryUpdate)
     }
 
     return NextResponse.json({ message: 'Score updated' }, { status: 200 });

@@ -9,7 +9,7 @@ import Footer from "@/components/footer/footer";
 import Dialog from "@/components/dialog-box/dialog-box.jsx";
 import Link from "next/link";
 import Loading from "@/components/loading/Loading";
-import Map from "@/components/map/Map.jsx";
+import Map from "@/components/Map/map.jsx";
 
 const COUNTRY_LIST = [
     "Afghanistan", "Angola", "Albania", "United Arab Emirates", "Argentina",
@@ -129,12 +129,12 @@ function App() {
   }, [country]);
 
   const getEndGameData = (score) => {
-    if (score <= 1) return { title: "🤡 Clown", line: "Did you click with your eyes closed? 💀" };
-    if (score <= 3) return { title: "🙃 Could Be Worse", line: "At least you didn’t get zero… I guess?" };
-    if (score <= 6) return { title: "😌 Not Bad", line: "You're getting there, one guess at a time." };
-    if (score <= 10) return { title: "😎 Well Played", line: "You’re flexing just a little. Respect." };
-    if (score <= 20) return { title: "🔥 Certified Pro", line: "You might actually know stuff 😮" };
-    if (score <= 50) return { title: "🎬 Absolute Cinema", line: "Oscar-worthy performance. Truly peak." };
+    if (score <= 3) return { title: "🤡 Clown", line: "Did you click with your eyes closed? 💀" };
+    if (score <= 6) return { title: "🙃 Could Be Worse", line: "At least you didn’t get zero… I guess?" };
+    if (score <= 10) return { title: "😌 Not Bad", line: "You're getting there, one guess at a time." };
+    if (score <= 25) return { title: "😎 Well Played", line: "You’re flexing just a little. Respect." };
+    if (score <= 60) return { title: "🔥 Certified Pro", line: "You might actually know stuff 😮" };
+    if (score <= 100) return { title: "🎬 Absolute Cinema", line: "Oscar-worthy performance. Truly peak." };
     return { title: "🧠 GOD TIER", line: "We’re not worthy 🙇 You win at life." };
   };
 
@@ -162,16 +162,11 @@ function App() {
     setOptions(newOptions);
     localStorage.setItem("options", JSON.stringify(newOptions));
 
-    await Promise.all([
+    Promise.all([
       fetch("/api/user/track-answer", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ userId: user.sub, current_question: encryptData(newCountry) })
-      }),
-      fetch("/api/user/track-score", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userId: user.sub, isCorrect })
       })
     ]);
 
@@ -184,10 +179,10 @@ const handleAnswer = async (e) => {
   setIsCorrect(correct);
 
   try {
-    await fetch("/api/user/track-score", {
+    fetch("/api/user/track-score", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ userId: user.sub, isCorrect: correct })
+      body: JSON.stringify({ userId: user.sub, is_correct: correct })
     });
   } catch (err) {
     console.error("Error tracking score", err);
@@ -202,7 +197,6 @@ const handleAnswer = async (e) => {
     setLevel(-1);
   }
 };
-
 
   if (isLoading || loading) return <Loading />;
   return (
@@ -255,12 +249,19 @@ const handleAnswer = async (e) => {
               <span className={Styles.tab}>Current Score: {level}</span>
             </div>
             <div className={Styles.mapContainer}>
-              <Map country={country} />
+              <Map 
+                country={country}
+                height={
+                window.innerWidth < 600
+                    ? "200"
+                    : "500"
+                }
+              />
             </div>
             <div className={Styles.optionContainer}>
               {options.map((option) => (
                 <div key={option} className={Styles.option}>
-                  <Button onClick={handleAnswer} text={option} variant="Secondary" />
+                  <Button height={50} onClick={handleAnswer} text={option} variant="Secondary" />
                 </div>
               ))}
             </div>

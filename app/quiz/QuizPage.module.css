@@ -5,7 +5,7 @@
 }
 
 .page {
-  margin-top: 140px;
+  margin-top: 120px;
   justify-items: center;
   height: 100%;
   max-width: 1000px;
@@ -76,7 +76,11 @@
   }
   
   .title{
-    font-size: 2.5rem;
+    font-size: 2rem;
+  }
+
+  .mapContainer {
+    margin-top: 10px;
   }
 }
 

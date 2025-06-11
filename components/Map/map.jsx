@@ -2,7 +2,7 @@
 import React, { useEffect, useCallback, useRef, useState } from "react";
 import 'leaflet/dist/leaflet.css';
 
-function Map({ country }) {
+function Map({ country , height }) {
   const mapRef = useRef(null);
   const mapInstanceRef = useRef(null);
   const [leafletLoaded, setLeafletLoaded] = useState(false);
@@ -94,7 +94,7 @@ function Map({ country }) {
     <div
       ref={mapRef}
       style={{ 
-        height: '500px', 
+        height: height ? `${height}px` : '500px',
         width: '100%',
         backgroundColor: '#361a96'
       }}
