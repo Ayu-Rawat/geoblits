@@ -189,6 +189,20 @@ const handleAnswer = async (e) => {
   }
 
   if (correct) {
+     const newLevel = level + 1;
+    if (newLevel > highLevel) {
+      setHighLevel(newLevel);
+      try {
+        fetch("/api/user/score", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ score: newLevel, user })
+        });
+      } catch (err) {
+        console.error("Error updating high score", err);
+      }
+    }
+
     await nextQuestion();
   } else {
     setEndGameData(getEndGameData(level));
