@@ -31,7 +31,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'GeoBlits - Play & Learn Geography',
     description: 'Fun, interactive and educational geography quiz. Play now!',
-    images: ['https://geoblits.com/og-image.png'],
+    images: ['https://geoblits.ayush.it.com/og-image.png'],
   },
   keywords: [
     "Geo quiz",
