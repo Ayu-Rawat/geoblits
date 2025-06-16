@@ -135,20 +135,6 @@ function App() {
     return { title: "🧠 GOD TIER", line: "We’re not worthy 🙇 You win at life." };
   };
 
-  const updateHighScore = async () => {
-    if (level > highLevel) {
-      setHighLevel(level);
-      try {
-        await fetch("/api/user/score", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-        });
-      } catch (err) {
-        console.error("Error updating high score", err);
-      }
-    }
-  };
-
   const nextQuestion = async () => {
     const newCountry = getRandomCountry();
     setCountry(newCountry);
@@ -192,6 +178,7 @@ const handleAnswer = async (e) => {
         fetch("/api/user/score", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ selected_option: encryptData(selected) })
         });
       } catch (err) {
         console.error("Error updating high score", err);
@@ -202,12 +189,13 @@ const handleAnswer = async (e) => {
   } else {
     setEndGameData(getEndGameData(level));
     setDialogOpen(true);
-    await updateHighScore();
     setLevel(-1);
   }
 };
 
   if (isLoading || loading) return <Loading />;
+
+  console.log("Current Country:", country);
   return (
     <>
       <Dialog isOpen={dialogOpen} setIsOpen={setDialogOpen}>
