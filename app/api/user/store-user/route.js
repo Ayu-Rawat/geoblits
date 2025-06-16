@@ -43,7 +43,7 @@ export async function POST(req) {
     const checkQuery = 'SELECT 1 FROM users WHERE user_id = $1 LIMIT 1';
     const checkResult = await sql.query(checkQuery, [user.sub]);
 
-    if (checkResult.rows?.length > 0) {
+    if (checkResult?.length > 0) {
       return NextResponse.json({
         statusCode: 200,
         message: 'User already exists — skipping insert',

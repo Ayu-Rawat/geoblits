@@ -207,8 +207,6 @@ const handleAnswer = async (e) => {
   }
 };
 
-  console.log("Current Country:", country);
-
   if (isLoading || loading) return <Loading />;
   return (
     <>

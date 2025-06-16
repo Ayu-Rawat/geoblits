@@ -2,6 +2,10 @@ import { NextResponse } from 'next/server';
 import sql from '@/db/db';
 import { auth0 } from '@/lib/auth0';
 
+const scoreTimestampsMap = new Map();
+const MAX_REQUESTS = 5;
+const TIME_WINDOW_MS = 10000;
+
 export async function POST() {
   const session = await auth0.getSession();
 
@@ -15,6 +19,22 @@ export async function POST() {
   if (!userId) {
     return NextResponse.json({ statusCode: 401, message: 'Unauthorized' }, { status: 401 });
   }
+
+  const now = Date.now();
+  const timestamps = scoreTimestampsMap.get(userId) || [];
+
+  const recentTimestamps = timestamps.filter(ts => now - ts < TIME_WINDOW_MS);
+
+  if (recentTimestamps.length >= MAX_REQUESTS) {
+    return NextResponse.json(
+      { statusCode: 429, message: 'Too many score attempts. Please slow down.' },
+      { status: 429 }
+    );
+  }
+
+  // Update timestamps
+  recentTimestamps.push(now);
+  scoreTimestampsMap.set(userId, recentTimestamps);
 
   try {
     const result = await sql.query(
