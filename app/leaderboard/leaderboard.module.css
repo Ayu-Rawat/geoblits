@@ -1,19 +1,14 @@
 .page{
-    height: fit-content;
+    height: calc(100vh -  180px);
     display: flex;
     flex-direction: column;
     padding: 10px;
     gap: 20px;
     background-color: #ff7dec;
-    max-width: 760px;
+    width: 100vw;
     margin: 0 auto;
     margin-top: 120px;
-}
-
-.background{
-    height:fit-content;
-    background-color: #ff7dec;
-    margin-top: 120px;
+    align-items: center;
 }
 
 .title{
@@ -36,6 +31,7 @@
     overflow-x: auto;
     border-radius: 10px;
     padding: 8px;
+    width: 760px;
 }
 
 .table {
@@ -87,6 +83,7 @@
 @media screen and (max-width: 600px) {
     .title {
         font-size: 3rem;
+        margin-top: 0px;
     }
 
     .page{
@@ -97,5 +94,15 @@
     .table td {
     padding: 8px 8px;
     text-align: left;
+    }
+
+    .tableContainer{
+        width: 100%;
+        margin-bottom: 30px;
+    }
+
+    .page{
+        height: fit-content;
+        margin-top: 90px;
     }
 }

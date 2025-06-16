@@ -43,7 +43,7 @@ const LeaderboardPage = () => {
   }
 
   return (
-    <div className={styles.background}>
+    <>
       <div className={styles.page}>
         <h1 className={styles.title}>Leaderboard</h1>
         <div className={styles.tableContainer}>
@@ -138,7 +138,7 @@ const LeaderboardPage = () => {
         </div>
       </div>
       <Footer />
-    </div>
+      </>
   );
 };
 

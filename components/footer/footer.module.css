@@ -77,13 +77,14 @@
 
 @media only screen and (max-width: 808px) {
     .footerContainer {
-        height: 450px;
+        height: 380px;
+        margin-top: 30px;
     }
 
     .footerHead {
         font-size: 19.5vw;
         left: 50%;
-        top: 20px;
+        top: 0px;
         transform: translateX(-50%);
     }
     .footerContent {

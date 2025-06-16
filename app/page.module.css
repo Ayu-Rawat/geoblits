@@ -400,7 +400,7 @@
     padding: 0;
     text-align: center;
   }
-  .leftC{ width: 100%;}
+  .leftC{ width: 100%; text-align: center;}
 
   .ctaLink {
     font-size: 5rem;

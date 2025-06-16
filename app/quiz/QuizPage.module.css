@@ -37,7 +37,6 @@
 
 .optionContainer {
   display: flex;
-  flex-direction: column;
   gap: 1rem;
   margin-top: 2rem;
   padding: 1rem;
@@ -45,6 +44,7 @@
 
 .option{
   color: white;
+  width: 100%;
 }
 
 .title{
@@ -63,16 +63,17 @@
   }
   
   .option {
-  flex: 1 1 45%;
-  max-width: 100%;
-  text-align: center;
-  width: 240px;
+    flex: 1 1 45%;
+    max-width: 100%;
+    text-align: center;
+    width: 240px;
   }
 }
 
 @media (max-width: 600px) {
-  .option {
-    max-width: 500px;
+  .optionContainer{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 2fr));
   }
   
   .title{
@@ -81,6 +82,10 @@
 
   .mapContainer {
     margin-top: 10px;
+  }
+
+  .page{
+    margin-top: 90px;
   }
 }
 
