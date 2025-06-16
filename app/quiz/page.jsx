@@ -73,19 +73,16 @@ function App() {
       try {
         const [highScoreRes, currentScoreRes, userProgressRes] = await Promise.all([
           fetch("/api/user/get-score", {
-            method: "POST",
+            method: "GET",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ userId: user.sub })
           }),
           fetch("/api/user/get-current-score", {
-            method: "POST",
+            method: "GET",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ userId: user.sub })
           }),
           fetch("/api/user/get", {
-            method: "POST",
+            method: "GET",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ userId: user.sub })
           })
         ]);
 
@@ -145,7 +142,6 @@ function App() {
         await fetch("/api/user/score", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ score: level, user })
         });
       } catch (err) {
         console.error("Error updating high score", err);
@@ -166,7 +162,7 @@ function App() {
       fetch("/api/user/track-answer", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userId: user.sub, current_question: encryptData(newCountry) })
+        body: JSON.stringify({ current_question: encryptData(newCountry) })
       })
     ]);
 
@@ -182,7 +178,7 @@ const handleAnswer = async (e) => {
     fetch("/api/user/track-score", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ userId: user.sub, is_correct: correct })
+      body: JSON.stringify({ is_correct: correct })
     });
   } catch (err) {
     console.error("Error tracking score", err);
@@ -196,7 +192,6 @@ const handleAnswer = async (e) => {
         fetch("/api/user/score", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ score: newLevel, user })
         });
       } catch (err) {
         console.error("Error updating high score", err);
@@ -211,6 +206,8 @@ const handleAnswer = async (e) => {
     setLevel(-1);
   }
 };
+
+  console.log("Current Country:", country);
 
   if (isLoading || loading) return <Loading />;
   return (

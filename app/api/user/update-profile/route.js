@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import sql from '@/db/db';
 import cloudinary from '@/lib/cloudinary';
 import crypto from 'crypto';
+import { auth0 } from '@/lib/auth0';
 
 // Secret salt from environment
 const SALT = process.env.HASH_SALT || 'your-secret-salt';
@@ -12,15 +13,25 @@ function hashWithSalt(sub){
 }
 
 export async function PATCH(req) {
-  const body = await req.json();
-  const { userId, nickname, imageUrl } = body;
+  const session = await auth0.getSession();
+  if (!session?.user || typeof session.user !== 'object') {
+    return NextResponse.json(
+      { statusCode: 401, message: 'Unauthorized' },
+      { status: 401 }
+    );
+  }
 
+  const user = session.user;
+  const userId = user.sub;
   if (!userId) {
     return NextResponse.json(
-      { statusCode: 400, message: 'User ID is required' },
+      { statusCode: 400, message: 'Invalid user ID' },
       { status: 400 }
     );
   }
+
+  const body = await req.json();
+  const { nickname, imageUrl } = body;
 
   // Create a secure hashed ID for Cloudinary
   const hashedId = hashWithSalt(userId);

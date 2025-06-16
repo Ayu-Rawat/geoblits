@@ -1,10 +1,26 @@
 import { NextResponse } from "next/server";
 import sql from "@/db/db"; 
+import { auth0 } from "@/lib/auth0";
 
-export async function POST(req) {
+export async function GET() {
   try {
-    const body = await req.json();
-    const userId = body?.userId;
+    const session = await auth0.getSession();
+    if (!session?.user || typeof session.user !== 'object') {
+      return NextResponse.json(
+        { statusCode: 401, message: "Unauthorized" },
+        { status: 401 }
+      );
+    }
+
+    const user = session.user;
+    if (!user.sub) {
+      return NextResponse.json(
+        { statusCode: 400, message: "Invalid user ID" },
+        { status: 400 }
+      );
+    }
+
+    const userId = user.sub;
 
     if (!userId) {
       return NextResponse.json(

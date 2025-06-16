@@ -1,8 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import NavBar from "./navbar";
-
-// auth0
 import { useUser } from "@auth0/nextjs-auth0";
 
 const links = [
@@ -17,19 +15,19 @@ export default function NavBarWrapper() {
 
   useEffect(() => {
     if (!isLoading) {
-      setIsAuthenticated(!!user); // true if user exists, false otherwise
+      const isLoggedIn = !!user;
+      setIsAuthenticated(isLoggedIn);
 
-      // Optionally store user in DB
-      if (user) {
+      if (isLoggedIn && user?.picture) {
         fetch("/api/user/store-user", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body : JSON.stringify({user}),
-        }).catch((error) =>
-          console.error("Error storing user:", error)
-        );
+          body: JSON.stringify({ picture: user.picture }),
+        }).catch((err) => {
+          console.error("Error storing user in DB:", err);
+        });
       }
     }
   }, [user, isLoading]);

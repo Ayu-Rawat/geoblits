@@ -22,8 +22,7 @@ export default function MyProfilePage() {
   const fetchUserDataAndScore = async () => {
     try {
       const userRes = await fetch("/api/user/get-user", {
-        method: "POST",
-        body: JSON.stringify({ userId: user.sub }),
+        method: "GET",
         headers: { "Content-Type": "application/json" },
       });
 
@@ -32,8 +31,7 @@ export default function MyProfilePage() {
       setUserData(userData.user);
 
       const scoreRes = await fetch("/api/user/get-score", {
-        method: "POST",
-        body: JSON.stringify({ userId: user.sub }),
+        method: "GET",
         headers: { "Content-Type": "application/json" },
       });
 
@@ -75,7 +73,6 @@ export default function MyProfilePage() {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          userId: user.sub,
           nickname: newNickname,
           imageUrl: base64Image,
         }),
@@ -105,7 +102,6 @@ export default function MyProfilePage() {
             method: "PATCH",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-              userId: user.sub,
               nickname: newNickname,
               imageUrl: random_imageUrl,
             }),
