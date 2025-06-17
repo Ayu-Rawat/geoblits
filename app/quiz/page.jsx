@@ -175,15 +175,18 @@ const handleAnswer = async (e) => {
     if (newLevel > highLevel) {
       setHighLevel(newLevel);
       try {
-        fetch("/api/user/score", {
+        setLoading(true);
+        await fetch("/api/user/score", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ selected_option: encryptData(selected) })
+          body: JSON.stringify({ selected_option: selected })
         });
+        setLoading(false);
       } catch (err) {
         console.error("Error updating high score", err);
       }
     }
+
 
     await nextQuestion();
   } else {
@@ -194,8 +197,6 @@ const handleAnswer = async (e) => {
 };
 
   if (isLoading || loading) return <Loading />;
-
-  console.log("Current Country:", country);
   return (
     <>
       <Dialog isOpen={dialogOpen} setIsOpen={setDialogOpen}>
