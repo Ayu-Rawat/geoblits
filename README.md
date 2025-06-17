@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌍 GeoBlits
 
-## Getting Started
+**GeoBlits** is a fast, interactive geography quiz game where you guess the **highlighted country** on a map. Built with **Next.js** and **Leaflet**, it’s designed to be simple, responsive, and fun — perfect for anyone who wants to sharpen their world map knowledge.
 
-First, run the development server:
+![GeoBlits Screenshot](https://res.cloudinary.com/dqvwf3z2c/image/upload/v1750079999/opengraph-image_btfado.png)
+
+---
+
+## 🚀 Features
+
+- Guess the highlighted country on an interactive map
+- Clean and minimal UI
+- Fast and responsive gameplay
+- Built with **Next.js**, **Leaflet**, and **JavaScript**
+
+---
+
+## 🛠️ Tech Stack
+
+- **Next.js** – React-based framework
+- **Leaflet.js** – For rendering interactive maps
+- **JavaScript** – Core language
+- **CSS Modules** – Styling
+- **GeoJSON** – For country shape data
+
+---
+
+## 📦 Setup & Run Locally
 
 ```bash
+git clone https://github.com/Ayu-Rwawat/geoblits.git
+cd geoblits
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🖼️ Demo
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+- Play the game live :  [Live Demo](https://geoblits.ayush.it.com)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 📌 Future Plans
 
-To learn more about Next.js, take a look at the following resources:
+- More quiz modes (flags, capitals, etc.)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📄 License
+MIT License. Free to use and modify.
