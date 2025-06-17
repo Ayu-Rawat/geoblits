@@ -52,7 +52,7 @@ function App() {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [countries, setCountries] = useState(COUNTRY_LIST);
-  const [country, setCountry] = useState("India");
+  const [country, setCountry] = useState("United States of America");
   const [options, setOptions] = useState([]);
   const [level, setLevel] = useState(0);
   const [highLevel, setHighLevel] = useState(0);
@@ -93,7 +93,7 @@ function App() {
         setHighLevel(highScoreData.score || 0);
         setLevel(currentScoreData.score || 0);
         if (userData.statusCode === 200) {
-          setCountry(decryptData(userData.user.question) || "India");
+          setCountry(decryptData(userData.user.question) || "United States of America");
         }
       } catch (err) {
         console.error("Error fetching scores or progress", err);
