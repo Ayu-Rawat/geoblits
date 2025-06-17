@@ -13,7 +13,7 @@ export const metadata = {
   description: "Boost your geography knowledge with the most interactive quiz game.",
   openGraph: {
     title: 'GeoBlits - Geography Quiz App',
-    description: 'Master countries, capitals, and maps with GeoBlits — your go-to quiz game for geography enthusiasts.',
+    description: 'Master maps with GeoBlits — your go-to quiz game for geography enthusiasts.',
     url: 'https://geoblits.ayush.it.com',
     siteName: 'GeoBlits',
     images: [
@@ -31,7 +31,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'GeoBlits - Play & Learn Geography',
     description: 'Fun, interactive and educational geography quiz. Play now!',
-    images: ['https://geoblits.ayush.it.com/og-image.png'],
+    images: ['/og-image.png'],
   },
   keywords: [
     "Geo quiz",
