@@ -251,8 +251,8 @@ const handleAnswer = async (e) => {
                 country={country}
                 height={
                 window.innerWidth < 600
-                    ? "220"
-                    : "500"
+                    ? "160"
+                    : "350"
                 }
               />
             </div>
