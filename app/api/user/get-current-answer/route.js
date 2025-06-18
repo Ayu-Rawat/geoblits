@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import sql from "@/db/db.js";
 import { auth0 } from "@/lib/auth0.js";
 
-export async function GET() {
+export async function POST(request) {
     try {
         const session = await auth0.getSession();
         if (!session?.user || typeof session.user !== 'object') {
@@ -21,7 +21,10 @@ export async function GET() {
             return NextResponse.json({ statusCode: 400, message: "User ID is required" }, { status: 400 });
         }
 
-        const user = await sql.query("SELECT question FROM track_answer WHERE user_id = $1", [userId]);
+        const body = await request.json();
+        const { game_no } = body;
+
+        const user = await sql.query("SELECT question FROM track_answer WHERE user_id = $1 and game_no = $2", [userId, game_no]);
 
         if (user.length === 0) {
             return NextResponse.json({ statusCode: 404, message: "User not found" }, { status: 404 });

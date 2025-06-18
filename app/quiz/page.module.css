@@ -1,0 +1,58 @@
+.page{
+    margin-top: 140px;
+}
+
+.quizCard{
+    height: 400px;
+    max-width: 1000px;
+    background-color: white;
+    padding: 16px;
+    border-radius: 10px;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+}
+
+.quizContainer{
+    position: relative;
+    border-radius: 10px;
+    width: 50%;
+    height: 100%;
+}
+
+.description{
+    font-size: 1.6rem;
+    color: white;
+    margin-bottom: 30px;
+}
+
+.heading{
+    font-size: 4rem;
+    color: transparent;
+    -webkit-text-stroke: 2px white;
+    margin-bottom: 16px;
+}
+
+@media screen and (max-width: 700px) {
+    .quizContainer {
+        height: 400px;
+        width: 100%;
+    }
+
+    .quizCard {
+        height: fit-content;
+        margin: 10px;
+        flex-direction: column;
+    }
+    
+    .heading {
+        font-size: 3rem;
+        margin-top: 0px;
+    }
+    
+
+    .page{
+        margin-top: 90px;
+    }
+}

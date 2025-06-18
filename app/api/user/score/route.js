@@ -35,7 +35,7 @@ export async function POST(req) {
 
   // parse request body
   const body = await req.json();
-  const { selected_option } = body;
+  const { selected_option,game_no } = body;
   if (!selected_option) {
     console.log('[BODY ERROR] Missing selected_option');
     return NextResponse.json(
@@ -47,8 +47,8 @@ export async function POST(req) {
 
   try {
     const [trackResult, scoreResult] = await Promise.all([
-      sql.query('SELECT question FROM track_answer WHERE user_id = $1', [userId]),
-      sql.query('SELECT score FROM score_data WHERE user_id = $1', [userId])
+      sql.query('SELECT question FROM track_answer WHERE user_id = $1 and game_no = $2', [userId,game_no]),
+      sql.query('SELECT score FROM score_data WHERE user_id = $1 and game_no = $2', [userId,game_no])
     ]);
 
     if (trackResult.length === 0) {
@@ -71,13 +71,13 @@ export async function POST(req) {
       if (scoreResult.length > 0) {
         const newScore = (scoreResult[0].score || 0) + 1;
         await sql.query(
-          'UPDATE score_data SET score = $1 WHERE user_id = $2',
-          [newScore, userId]
+          'UPDATE score_data SET score = $1 WHERE user_id = $2 AND game_no = $3',
+          [newScore, userId, game_no]
         );
       } else {
         await sql.query(
           'INSERT INTO score_data (user_id, score) VALUES ($1, $2)',
-          [userId, 1]
+          [userId, 1 , game_no]
         );
       }
       return NextResponse.json({

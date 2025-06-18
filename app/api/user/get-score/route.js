@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import sql from "@/db/db"; 
 import { auth0 } from "@/lib/auth0";
 
-export async function GET() {
+export async function POST(request) {
   try {
     const session = await auth0.getSession();
     if (!session?.user || typeof session.user !== 'object') {
@@ -29,9 +29,12 @@ export async function GET() {
       );
     }
 
+    const body = await request.json();
+    const { game_no } = body;
+
     const result = await sql.query(
-      "SELECT score FROM score_data WHERE user_id = $1 LIMIT 1",
-      [userId]
+      "SELECT score FROM score_data WHERE user_id = $1 and game_no = $2",
+      [userId, game_no]
     );
 
     if (result.length === 0) {

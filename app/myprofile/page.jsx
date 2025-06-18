@@ -31,7 +31,8 @@ export default function MyProfilePage() {
       setUserData(userData.user);
 
       const scoreRes = await fetch("/api/user/get-score", {
-        method: "GET",
+        method: "POST",
+        body: JSON.stringify({ game_no: 1 }),
         headers: { "Content-Type": "application/json" },
       });
 

@@ -13,7 +13,15 @@ const LeaderboardPage = () => {
   useEffect(() => {
     async function fetchLeaderboard() {
       try {
-        const response = await fetch("/api/user/leader-board");
+        const response = await fetch("/api/user/leader-board",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ game_no: 1 }),
+          }
+        );
         if (!response.ok) throw new Error("Network response was not ok");
         const data = await response.json();
         setLeaderboard(data.data);
@@ -100,7 +108,7 @@ const LeaderboardPage = () => {
               <Image
                 src={entry.image_url}
                 alt={`${entry.nickname} blurred`}
-                fill
+                fill={true}
                 style={{
                   objectFit: "cover",
                   objectPosition: "center",
@@ -108,7 +116,6 @@ const LeaderboardPage = () => {
                   borderRadius: "0px",
                   filter: "blur(15px)",
                 }}
-                className={styles.blurredImage}
               />
               <Image
                 style={{
@@ -119,8 +126,7 @@ const LeaderboardPage = () => {
                 }}
                 src={entry.image_url}
                 alt={`${entry.nickname} avatar`}
-                fill
-                className={styles.clearImage}
+                fill={true}
               />
             </div>
             <span style={{ color: "white" }}>{entry.nickname}</span>

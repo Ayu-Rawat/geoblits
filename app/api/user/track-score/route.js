@@ -5,7 +5,7 @@ import { auth0 } from '@/lib/auth0';
 export async function POST(req) {
   try {
     const body = await req.json();
-    const { is_correct } = body;
+    const { is_correct,game_no } = body;
 
     const session = await auth0.getSession();
     if (!session?.user || typeof session.user !== 'object') {
@@ -32,23 +32,23 @@ export async function POST(req) {
       );
     }
 
-    const result = await sql.query(`SELECT user_id FROM track_score WHERE user_id = $1`, [userId]);
+    const result = await sql.query(`SELECT user_id FROM track_score WHERE user_id = $1 and game_no = $2`, [userId, game_no]);
 
     if (result.length === 0) {
       const initialScore = is_correct ? 1 : 0;
       await sql.query(
-        `INSERT INTO track_score (user_id, score) VALUES ($1, $2)`,
-        [userId, initialScore]
+        `INSERT INTO track_score (user_id, score, game_no) VALUES ($1, $2, $3)`,
+        [userId, initialScore, game_no]
       );
     } else {
       let queryUpdate;
       if (is_correct === true) {
-         queryUpdate = `UPDATE track_score SET score = score + 1 WHERE user_id = $1`
+         queryUpdate = `UPDATE track_score SET score = score + 1 WHERE user_id = $1 and game_no = $2`;
       }else{
-        queryUpdate = `UPDATE track_score SET score = 0 WHERE user_id = $1`;
+        queryUpdate = `UPDATE track_score SET score = 0 WHERE user_id = $1 and game_no = $2`;
     } 
 
-      await sql.query(queryUpdate, [userId]);
+      await sql.query(queryUpdate, [userId, game_no]);
 
     }
 
