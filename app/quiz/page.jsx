@@ -44,7 +44,56 @@ const COUNTRY_LIST = [
     "Taiwan", "United Republic of Tanzania", "Uganda", "Ukraine", "Uruguay",
     "United States of America", "Uzbekistan", "Venezuela", "Vietnam", "Vanuatu",
     "West Bank", "Yemen", "South Africa", "Zambia", "Zimbabwe"
-  ];
+];
+
+const COUNTRY_REGION_MAP = {
+  "Afghanistan": "Asia", "Albania": "Europe", "Algeria": "Africa", "Andorra": "Europe",
+  "Angola": "Africa", "Antarctica": "Antarctica", "Argentina": "South America", "Armenia": "Asia",
+  "Australia": "Oceania", "Austria": "Europe", "Azerbaijan": "Asia", "Bahamas": "North America",
+  "Bahrain": "Asia", "Bangladesh": "Asia", "Barbados": "North America", "Belarus": "Europe",
+  "Belgium": "Europe", "Belize": "North America", "Benin": "Africa", "Bhutan": "Asia",
+  "Bolivia": "South America", "Bosnia and Herzegovina": "Europe", "Botswana": "Africa",
+  "Brazil": "South America", "Brunei": "Asia", "Bulgaria": "Europe", "Burkina Faso": "Africa",
+  "Burundi": "Africa", "Cambodia": "Asia", "Cameroon": "Africa", "Canada": "North America",
+  "Cape Verde": "Africa", "Central African Republic": "Africa", "Chad": "Africa", "Chile": "South America",
+  "China": "Asia", "Colombia": "South America", "Comoros": "Africa", "Congo": "Africa",
+  "Costa Rica": "North America", "Croatia": "Europe", "Cuba": "North America", "Cyprus": "Asia",
+  "Czech Republic": "Europe", "Denmark": "Europe", "Djibouti": "Africa", "Dominican Republic": "North America",
+  "Ecuador": "South America", "Egypt": "Africa", "El Salvador": "North America", "Equatorial Guinea": "Africa",
+  "Eritrea": "Africa", "Estonia": "Europe", "Eswatini": "Africa", "Ethiopia": "Africa", "Fiji": "Oceania",
+  "Finland": "Europe", "France": "Europe", "Gabon": "Africa", "Gambia": "Africa", "Georgia": "Asia",
+  "Germany": "Europe", "Ghana": "Africa", "Greece": "Europe", "Greenland": "North America",
+  "Guatemala": "North America", "Guinea": "Africa", "Guinea Bissau": "Africa", "Guyana": "South America",
+  "Haiti": "North America", "Honduras": "North America", "Hungary": "Europe", "Iceland": "Europe",
+  "India": "Asia", "Indonesia": "Asia", "Iran": "Asia", "Iraq": "Asia", "Ireland": "Europe",
+  "Israel": "Asia", "Italy": "Europe", "Ivory Coast": "Africa", "Jamaica": "North America",
+  "Japan": "Asia", "Jordan": "Asia", "Kazakhstan": "Asia", "Kenya": "Africa", "Kuwait": "Asia",
+  "Kyrgyzstan": "Asia", "Laos": "Asia", "Latvia": "Europe", "Lebanon": "Asia", "Lesotho": "Africa",
+  "Liberia": "Africa", "Libya": "Africa", "Lithuania": "Europe", "Luxembourg": "Europe",
+  "Madagascar": "Africa", "Malawi": "Africa", "Malaysia": "Asia", "Maldives": "Asia", "Mali": "Africa",
+  "Malta": "Europe", "Mauritania": "Africa", "Mexico": "North America", "Moldova": "Europe",
+  "Monaco": "Europe", "Mongolia": "Asia", "Montenegro": "Europe", "Morocco": "Africa",
+  "Mozambique": "Africa", "Myanmar": "Asia", "Namibia": "Africa", "Nepal": "Asia",
+  "Netherlands": "Europe", "New Zealand": "Oceania", "Nicaragua": "North America",
+  "Niger": "Africa", "Nigeria": "Africa", "North Korea": "Asia", "North Macedonia": "Europe",
+  "Norway": "Europe", "Oman": "Asia", "Pakistan": "Asia", "Panama": "North America",
+  "Papua New Guinea": "Oceania", "Paraguay": "South America", "Peru": "South America",
+  "Philippines": "Asia", "Poland": "Europe", "Portugal": "Europe", "Qatar": "Asia",
+  "Republic of the Congo": "Africa", "Romania": "Europe", "Russia": "Asia", "Rwanda": "Africa",
+  "Saudi Arabia": "Asia", "Senegal": "Africa", "Serbia": "Europe", "Sierra Leone": "Africa",
+  "Singapore": "Asia", "Slovakia": "Europe", "Slovenia": "Europe", "Somalia": "Africa",
+  "South Africa": "Africa", "South Korea": "Asia", "South Sudan": "Africa", "Spain": "Europe",
+  "Sri Lanka": "Asia", "Sudan": "Africa", "Suriname": "South America", "Sweden": "Europe",
+  "Switzerland": "Europe", "Syria": "Asia", "Taiwan": "Asia", "Tajikistan": "Asia",
+  "Tanzania": "Africa", "Thailand": "Asia", "Timor-Leste": "Asia", "Togo": "Africa",
+  "Trinidad and Tobago": "North America", "Tunisia": "Africa", "Turkey": "Asia", "Turkmenistan": "Asia",
+  "Uganda": "Africa", "Ukraine": "Europe", "United Arab Emirates": "Asia",
+  "United Kingdom": "Europe", "United States of America": "North America",
+  "Uruguay": "South America", "Uzbekistan": "Asia", "Vanuatu": "Oceania",
+  "Venezuela": "South America", "Vietnam": "Asia", "Western Sahara": "Africa",
+  "Yemen": "Asia", "Zambia": "Africa", "Zimbabwe": "Africa"
+};
+
 
 function App() {
   const [isCorrect, setIsCorrect] = useState(false);
@@ -110,12 +159,29 @@ function App() {
   };
 
   const generateOptions = (correct) => {
+    const region = COUNTRY_REGION_MAP[correct];
+
+    let filteredCountries = countries.filter(
+      (c) => c !== correct && COUNTRY_REGION_MAP[c] === region
+    );
+
+    if (filteredCountries.length < 3) {
+      filteredCountries = countries.filter((c) => c !== correct);
+    }
+
     const optionSet = new Set([correct]);
+    while (optionSet.size < 4 && filteredCountries.length > 0) {
+      const randomCountry = filteredCountries[Math.floor(Math.random() * filteredCountries.length)];
+      optionSet.add(randomCountry);
+    }
+
     while (optionSet.size < 4) {
       optionSet.add(getRandomCountry([...optionSet]));
     }
+
     return Array.from(optionSet).sort(() => Math.random() - 0.5);
   };
+
 
   useEffect(() => {
     if (country && options.length === 0 && !localStorage.getItem("options")) {
